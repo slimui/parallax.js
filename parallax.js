@@ -313,15 +313,12 @@
       }
     },
     destroy: function(el){
-      var i,
-          parallaxElement = $(el).data('px.parallax');
-      parallaxElement.$mirror.remove();
-      for(i=0; i < this.sliders.length; i+=1){
-        if(this.sliders[i] == parallaxElement){
+      for(var i=0; i < this.sliders.length; i+=1){
+        if(this.sliders[i].$element[0] == el){
+          this.sliders[i].$mirror.remove();
           this.sliders.splice(i, 1);
         }
       }
-      $(el).data('px.parallax', false);
       if(this.sliders.length === 0){
         $(window).off('scroll.px.parallax resize.px.parallax load.px.parallax');
         this.isReady = false;
